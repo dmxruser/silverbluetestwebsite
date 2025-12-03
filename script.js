@@ -68,61 +68,27 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Generate mock flights with more realistic data
     function generateMockFlights(origin, destination, passengerCount) {
-        // Route distances in miles (approximate)
-        const routes = {
-            'New York-Los Angeles': 2450,
-            'New York-Chicago': 790,
-            'New York-London': 3450,
-            'New York-Paris': 3620,
-            'New York-Tokyo': 6740,
-            'New York-Rio de Janeiro': 4970,
-            'Los Angeles-Chicago': 1750,
-            'Los Angeles-London': 5360,
-            'Los Angeles-Paris': 5590,
-            'Los Angeles-Tokyo': 5490,
-            'Los Angeles-Rio de Janeiro': 6050,
-            'Chicago-London': 3950,
-            'Chicago-Paris': 4130,
-            'Chicago-Tokyo': 6300,
-            'Chicago-Rio de Janeiro': 5300,
-            'London-Paris': 215,
-            'London-Tokyo': 5960,
-            'London-Rio de Janeiro': 5900,
-            'Paris-Tokyo': 6280,
-            'Paris-Rio de Janeiro': 5800,
-            'Tokyo-Rio de Janeiro': 11200
-        };
-        
-        // Calculate distance for both directions
-        let distance = routes[`${origin}-${destination}`] || routes[`${destination}-${origin}`] || 3000;
-        
-        // Function to determine realistic stops based on distance
-        function calculateStops(distance) {
-            if (distance <= 500) {
-                return Math.random() > 0.9 ? 1 : 0; // Short haul: mostly direct
-            } else if (distance <= 1500) {
-                return Math.random() > 0.7 ? 0 : 1; // Medium-short: mostly direct, some 1 stop
-            } else if (distance <= 3000) {
-                return Math.random() > 0.5 ? 1 : (Math.random() > 0.5 ? 0 : 2); // Medium: mix of stops
-            } else if (distance <= 6000) {
-                return Math.random() > 0.4 ? 1 : (Math.random() > 0.6 ? 2 : 0); // Long: mostly 1-2 stops, rare direct
+        // Function to determine realistic stops based on flight duration
+        function calculateStops(duration) {
+            if (duration <= 1) {
+                return 0; // Very short: direct
+            } else if (duration <= 4) {
+                return Math.random() > 0.8 ? 0 : 1; // Short flights mostly direct
+            } else if (duration <= 8) {
+                return Math.random() > 0.5 ? 1 : (Math.random() > 0.5 ? 0 : 2); // Medium flights, mix of stops
             } else {
-                return Math.random() > 0.8 ? 2 : 1; // Very long: mostly 1-2 stops
+                return Math.random() > 0.6 ? 2 : 1; // Long flights mostly 1-2 stops
             }
         }
         
         const flights = [];
         const flightCount = Math.floor(Math.random() * 5) + 4; // 4-8 flights
         for (let i = 0; i < flightCount; i++) {
-            const departureHour = Math.floor(Math.random() * 18) + 6; // 6 AM to 12 AM
+            const departureHour = Math.floor(Math.random() * 24);
             const departureMin = Math.random() > 0.5 ? 0 : 30;
+            const duration = Math.floor(Math.random() * 15) + 1; // 1-15 hours
             
-            // Calculate duration based on distance and stops
-            const baseHours = distance / 500; // Approximate: 500 miles per hour
-            const stops = calculateStops(distance);
-            const stopTime = stops * 1.5; // 1.5 hours per stop
-            const duration = Math.round(baseHours + stopTime);
-            
+            const stops = calculateStops(duration);
             const arrivalHour = (departureHour + duration) % 24;
             const arrivalMin = departureMin;
 
