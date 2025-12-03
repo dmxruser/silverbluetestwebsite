@@ -74,7 +74,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const departureHour = Math.floor(Math.random() * 18) + 6; // 6 AM to 12 AM
             const departureMin = Math.random() > 0.5 ? 0 : 30;
             const duration = Math.floor(Math.random() * 10) + 2; // 2-12 hours
-            const stops = Math.random() > 0.6 ? 0 : Math.floor(Math.random() * 2) + 1;
+            
+            // More realistic stops based on duration
+            let stops = 0;
+            if (duration <= 4) {
+                stops = Math.random() > 0.7 ? 0 : 1; // Short flights mostly direct
+            } else if (duration <= 8) {
+                stops = Math.random() > 0.5 ? 1 : Math.random() > 0.5 ? 0 : 2; // Medium flights, some with 1-2 stops
+            } else {
+                stops = Math.random() > 0.6 ? 2 : 1; // Long flights mostly 1-2 stops
+            }
             
             const arrivalHour = (departureHour + duration) % 24;
             const arrivalMin = departureMin;
