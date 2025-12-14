@@ -10,6 +10,26 @@ function selectClassAndClose(classValue) {
     }
 }
 
+// Mini search on index.html
+document.addEventListener('DOMContentLoaded', () => {
+    const miniSearchBtn = document.getElementById('miniSearchBtn');
+    if (miniSearchBtn) {
+        miniSearchBtn.addEventListener('click', () => {
+            const origin = document.getElementById('miniOrigin').value;
+            const destination = document.getElementById('miniDestination').value;
+            const date = document.getElementById('miniDate').value;
+            const passengers = document.getElementById('miniPassengers').value;
+            if (origin && destination && date) {
+                // Store search data in localStorage
+                localStorage.setItem('searchData', JSON.stringify({ origin, destination, date, passengers }));
+                window.location.href = 'booking.html';
+            } else {
+                alert('Please fill in origin, destination, and date.');
+            }
+        });
+    }
+});
+
 // Close modals when clicking the X button or outside
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.modal .close-modal').forEach(closeBtn => {
@@ -38,6 +58,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Only run this section if the flight search form is present
     if (flightSearchForm && flightList) {
+        // Load search data from localStorage if available
+        const searchData = localStorage.getItem('searchData');
+        if (searchData) {
+            const data = JSON.parse(searchData);
+            document.getElementById('originInput').value = data.origin;
+            document.getElementById('destinationInput').value = data.destination;
+            document.getElementById('dateInput').value = data.date;
+            document.getElementById('passengerCount').value = data.passengers;
+            localStorage.removeItem('searchData'); // Clear after use
+            // Auto-search
+            setTimeout(() => {
+                flightSearchForm.dispatchEvent(new Event('submit'));
+            }, 100);
+        }
+
         let currentFlights = [];
         let selectedFlightForBooking = null; // Renamed to avoid conflict with booking modal's selectedFlight
 

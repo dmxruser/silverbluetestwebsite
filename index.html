@@ -27,30 +27,46 @@
     </header>
 
     <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Your Journey Begins Here</h1>
-                <p>Experience world-class travel with Silverblue Airlines.</p>
-                 <a href="booking.html" class="btn">Find Flights</a>
-            </div>
-        </section>
+         <section class="hero">
+             <div class="container">
+                 <h1>Your Journey Begins Here</h1>
+                 <p>Experience world-class travel with Silverblue Airlines.</p>
+                 <form id="miniSearchForm" style="margin-top: 20px;">
+                     <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                         <select id="miniOrigin" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                             <option value="">From</option>
+                             <option value="New York">New York (JFK)</option>
+                             <option value="Los Angeles">Los Angeles (LAX)</option>
+                             <option value="Chicago">Chicago (ORD)</option>
+                             <option value="London">London (LHR)</option>
+                             <option value="Paris">Paris (CDG)</option>
+                             <option value="Tokyo">Tokyo (HND)</option>
+                             <option value="Rio de Janeiro">Rio de Janeiro (GIG)</option>
+                         </select>
+                         <select id="miniDestination" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                             <option value="">To</option>
+                             <option value="New York">New York (JFK)</option>
+                             <option value="Los Angeles">Los Angeles (LAX)</option>
+                             <option value="Chicago">Chicago (ORD)</option>
+                             <option value="London">London (LHR)</option>
+                             <option value="Paris">Paris (CDG)</option>
+                             <option value="Tokyo">Tokyo (HND)</option>
+                             <option value="Rio de Janeiro">Rio de Janeiro (GIG)</option>
+                         </select>
+                         <input type="date" id="miniDate" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                         <select id="miniPassengers" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                             <option value="1">1 Passenger</option>
+                             <option value="2">2 Passengers</option>
+                             <option value="3">3 Passengers</option>
+                             <option value="4">4 Passengers</option>
+                         </select>
+                         <button type="button" id="miniSearchBtn" class="btn">Search Flights</button>
+                     </div>
+                 </form>
+             </div>
+         </section>
 
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="index.html">Silverblue Airlines</a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="flights.html">Flights</a></li>
-                    <li><a href="booking.html">Book</a></li>
-                    <li><a href="#">Manage Booking</a></li>
-                    <li><a href="#">Destinations</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+
 
         <section class="destinations">
             <div class="container">
