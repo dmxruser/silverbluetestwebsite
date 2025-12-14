@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (origin && destination && date) {
                 // Store search data in localStorage
                 localStorage.setItem('searchData', JSON.stringify({ origin, destination, date, passengers }));
-                window.location.href = 'booking.html';
+                window.location.href = 'flights.html';
             } else {
                 alert('Please fill in origin, destination, and date.');
             }
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Flight Search and Results Logic (primarily for flights.html) ---
+    // --- Flight Search and Results Logic (for flights.html and booking.html) ---
     const flightSearchForm = document.getElementById('flightSearchForm');
     const searchButton = document.getElementById('searchFlightsButton');
     const resultsContainer = document.getElementById('searchResultsContainer');
@@ -56,21 +56,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterDirect = document.getElementById('filterDirect');
     const passengerCountSelect = document.getElementById('passengerCount'); // Renamed to avoid conflict
 
-    // Only run this section if the flight search form is present
-    if (flightSearchForm && flightList) {
+    // Run this section if results container is present (for booking.html or flights.html)
+    if (resultsContainer && flightList) {
         // Load search data from localStorage if available
         const searchData = localStorage.getItem('searchData');
         if (searchData) {
             const data = JSON.parse(searchData);
-            document.getElementById('originInput').value = data.origin;
-            document.getElementById('destinationInput').value = data.destination;
-            document.getElementById('dateInput').value = data.date;
-            document.getElementById('passengerCount').value = data.passengers;
-            localStorage.removeItem('searchData'); // Clear after use
-            // Auto-search
-            setTimeout(() => {
-                flightSearchForm.dispatchEvent(new Event('submit'));
-            }, 100);
+            // If on booking.html, directly generate flights
+            if (window.location.pathname.includes('flights.html')) {
+                currentFlights = generateMockFlights(data.origin, data.destination, data.passengers);
+                filterAndSortFlights();
+                if (resultsContainer) resultsContainer.style.display = 'block';
+                localStorage.removeItem('searchData'); // Clear after use
+            } else if (flightSearchForm) {
+                // On flights.html, populate form and auto-search
+                document.getElementById('originInput').value = data.origin;
+                document.getElementById('destinationInput').value = data.destination;
+                document.getElementById('dateInput').value = data.date;
+                document.getElementById('passengerCount').value = data.passengers;
+                localStorage.removeItem('searchData'); // Clear after use
+                // Auto-search
+                setTimeout(() => {
+                    flightSearchForm.dispatchEvent(new Event('submit'));
+                }, 100);
+            }
         }
 
         let currentFlights = [];

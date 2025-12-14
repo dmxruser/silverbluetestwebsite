@@ -59,6 +59,23 @@ nav ul li a {
     color: #fff;
     text-align: center;
     padding: 100px 0;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2;
 }
 
 .hero h1 {
@@ -69,6 +86,38 @@ nav ul li a {
 .hero p {
     font-size: 20px;
     margin-bottom: 30px;
+}
+
+#miniSearchForm {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#miniSearchForm select, #miniSearchForm input {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 5px;
+    flex: 1;
+}
+
+#miniSearchForm .btn {
+    background-color: #ff6600;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+#miniSearchForm .btn:hover {
+    background-color: #e65c00;
 }
 
 .btn {
