@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     businessPrice: businessPricePerPerson.toFixed(2),
                     firstPrice: firstPricePerPerson.toFixed(2),
                     airline: 'Silverblue Airlines',
-                    aircraft: ['Boeing 737', 'Airbus A320', 'Airbus A380'][Math.floor(Math.random() * 3)],
+                    aircraft: ['Boeing 737', 'Boeing 757', 'Airbus A330'][Math.floor(Math.random() * 3)],
                     isDirect: stops === 0
                 });
             }
@@ -601,4 +601,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     // --- End of Booking Confirmation Page Logic ---
+
+    // --- Points Calculator Logic ---
+    const pointsForm = document.getElementById('pointsForm');
+    if (pointsForm) {
+        pointsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const cost = parseFloat(document.getElementById('flightCost').value);
+            const tier = parseFloat(document.getElementById('tier').value);
+            if (cost > 0) {
+                const basePoints = Math.floor(cost / 10); // 1 point per $10
+                const totalPoints = Math.floor(basePoints * tier);
+                document.getElementById('pointsResult').textContent = `You'll earn ${totalPoints} points (${basePoints} base + ${Math.floor(basePoints * (tier - 1))} bonus).`;
+            } else {
+                document.getElementById('pointsResult').textContent = 'Please enter a valid flight cost.';
+            }
+        });
+    }
+
+    // --- Join Rewards Form Logic ---
+    const joinForm = document.getElementById('joinForm');
+    if (joinForm) {
+        joinForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            if (name && email) {
+                showMessage('Thank you for joining Silvers and Blues! Check your email for confirmation.', false);
+                joinForm.reset();
+            } else {
+                showMessage('Please fill in all fields.', true);
+            }
+        });
+    }
 });

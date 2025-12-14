@@ -1009,6 +1009,104 @@ select {
     color: #721c24;
 }
 
+/* Rewards Page Styles */
+.rewards-hero {
+    background: url('windows-wallpaper-expeditions/Windows_Wallpaper Expeditions_IG_ Caleb Wielhouwer_1of2_1x1.jpg') no-repeat center center/cover;
+    color: #fff;
+    text-align: center;
+    padding: 100px 0;
+    position: relative;
+}
+
+.rewards-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.rewards-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.rewards-tiers {
+    padding: 40px 0;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+.tiers {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.tier {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: calc(33% - 40px);
+    min-width: 250px;
+}
+
+.tier h3 {
+    color: #003366;
+}
+
+.tier ul {
+    list-style: none;
+    padding: 0;
+}
+
+.tier li {
+    padding: 5px 0;
+}
+
+.join-program {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.join-program form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Points Page Styles */
+.points-calculator {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.calculator {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.calculator h3 {
+    color: #003366;
+}
+
+.calculator form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.calculator button {
+    align-self: center;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .results-header {
