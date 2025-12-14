@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Silverblue Airlines - Booking Confirmation</title>
+     <title>Silverblue Airlines - Book Flights</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,9 +25,103 @@
     </header>
 
     <main>
-        <section class="booking-confirmation">
+         <section class="flight-search">
+             <div class="container">
+                 <h2>Search for Flights</h2>
+                 <form id="flightSearchForm">
+                     <div class="form-group">
+                         <label for="originInput">Origin</label>
+                         <select id="originInput" required>
+                             <option value="">Select Origin</option>
+                             <option value="New York">New York (JFK)</option>
+                             <option value="Los Angeles">Los Angeles (LAX)</option>
+                             <option value="Chicago">Chicago (ORD)</option>
+                             <option value="London">London (LHR)</option>
+                             <option value="Paris">Paris (CDG)</option>
+                             <option value="Tokyo">Tokyo (HND)</option>
+                             <option value="Rio de Janeiro">Rio de Janeiro (GIG)</option>
+                         </select>
+                     </div>
+                     <div class="form-group">
+                         <label for="destinationInput">Destination</label>
+                         <select id="destinationInput" required>
+                             <option value="">Select Destination</option>
+                             <option value="New York">New York (JFK)</option>
+                             <option value="Los Angeles">Los Angeles (LAX)</option>
+                             <option value="Chicago">Chicago (ORD)</option>
+                             <option value="London">London (LHR)</option>
+                             <option value="Paris">Paris (CDG)</option>
+                             <option value="Tokyo">Tokyo (HND)</option>
+                             <option value="Rio de Janeiro">Rio de Janeiro (GIG)</option>
+                         </select>
+                     </div>
+                     <div class="form-group">
+                         <label for="dateInput">Departure Date</label>
+                         <input type="date" id="dateInput" required>
+                     </div>
+                     <div class="form-group">
+                         <label for="return-date">Return Date</label>
+                         <input type="date" id="return-date">
+                     </div>
+                     <div class="form-group">
+                         <label for="passengerCount">Passengers</label>
+                         <select id="passengerCount">
+                             <option value="1">1 Passenger</option>
+                             <option value="2">2 Passengers</option>
+                             <option value="3">3 Passengers</option>
+                             <option value="4">4 Passengers</option>
+                             <option value="5">5+ Passengers</option>
+                         </select>
+                     </div>
+                     <div class="form-group">
+                         <label>Class</label>
+                         <div class="radio-group">
+                             <label><input type="radio" name="seatClass" value="economy" checked> Economy <span id="economyPrice">$0 per person, $0 total</span></label>
+                             <label><input type="radio" name="seatClass" value="business"> Business <span id="businessPrice">$0 per person, $0 total</span></label>
+                             <label><input type="radio" name="seatClass" value="first"> First Class <span id="firstPrice">$0 per person, $0 total</span></label>
+                         </div>
+                     </div>
+                     <button type="submit" id="searchFlightsButton" class="btn">Search Flights</button>
+                 </form>
+             </div>
+         </section>
+
+         <!-- Dynamic Search Results will be injected here -->
+         <section id="searchResultsContainer" class="flight-results" style="display: none;">
+             <div class="container">
+                 <div class="results-header">
+                     <h2>Available Flights</h2>
+                     <div class="sort-controls">
+                         <label for="sortBy">Sort by:</label>
+                         <select id="sortBy">
+                             <option value="price-asc">Price (Low to High)</option>
+                             <option value="price-desc">Price (High to Low)</option>
+                             <option value="departure">Departure Time</option>
+                             <option value="duration">Duration</option>
+                         </select>
+                     </div>
+                 </div>
+                 <div id="filterPanel" class="filter-panel">
+                     <h3>Filters</h3>
+                     <div class="filter-group">
+                         <label>
+                             <input type="checkbox" id="filterDirect" checked> Direct Flights Only
+                         </label>
+                         <label>
+                             Max Price: <span id="priceLabel">$1000</span>
+                         </label>
+                         <input type="range" id="priceRange" min="100" max="2000" value="1000" step="50">
+                     </div>
+                 </div>
+                 <div class="flight-list" id="flightList">
+                     <!-- Flight cards will be injected here by script.js -->
+                 </div>
+             </div>
+         </section>
+
+         <section class="booking-confirmation">
             <div class="container">
-                <h2>Your Booking is Confirmed!</h2>
+                 <h2>Complete Your Booking</h2>
                 <div id="bookingConfirmationDetails" class="confirmation-details">
                     <!-- Booking details will be dynamically loaded here -->
                     <p>Thank you for booking with Silverblue Airlines. Your flight details and confirmation code will be displayed here shortly.</p>
