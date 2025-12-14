@@ -399,8 +399,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Handle booking form submission
-        const bookingForm = document.getElementById('bookingForm');
+        // Handle booking form submission (only for modal)
+        const bookingForm = document.querySelector('#bookingModal #bookingForm');
         if (bookingForm) {
             bookingForm.addEventListener('submit', (e) => {
                 e.preventDefault();
