@@ -12,13 +12,15 @@ function selectClassAndClose(classValue) {
 
 // Mini search on index.html
 document.addEventListener('DOMContentLoaded', () => {
-    const miniSearchBtn = document.getElementById('miniSearchBtn');
-    if (miniSearchBtn) {
-        miniSearchBtn.addEventListener('click', () => {
-            const origin = document.getElementById('miniOrigin').value;
-            const destination = document.getElementById('miniDestination').value;
-            const date = document.getElementById('miniDate').value;
-            const passengers = document.getElementById('miniPassengers').value;
+    const miniSearchForm = document.getElementById('miniSearchForm');
+    if (miniSearchForm) {
+        miniSearchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(miniSearchForm);
+            const origin = formData.get('origin');
+            const destination = formData.get('destination');
+            const date = formData.get('date');
+            const passengers = formData.get('passengers');
             if (origin && destination && date) {
                 // Store search data in localStorage
                 localStorage.setItem('searchData', JSON.stringify({ origin, destination, date, passengers }));
@@ -62,14 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const searchData = localStorage.getItem('searchData');
         if (searchData) {
             const data = JSON.parse(searchData);
-            // If on booking.html, directly generate flights
-            if (window.location.pathname.includes('flights.html')) {
-                currentFlights = generateMockFlights(data.origin, data.destination, data.passengers);
-                filterAndSortFlights();
-                if (resultsContainer) resultsContainer.style.display = 'block';
-                localStorage.removeItem('searchData'); // Clear after use
-            } else if (flightSearchForm) {
-                // On flights.html, populate form and auto-search
+            if (flightSearchForm) {
+                // Populate form and auto-search
                 document.getElementById('originInput').value = data.origin;
                 document.getElementById('destinationInput').value = data.destination;
                 document.getElementById('dateInput').value = data.date;
